@@ -1,0 +1,16 @@
+{
+  "name": "weather-ua-charts",
+  "description": "Weather charts from data by http://weather.ua/.",
+  "version": "0.1.0",
+  "dependencies": {
+    "express": "3.x",
+    "ltx": "0.x"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
+  "scripts": {
+    "start": "node app"
+  }
+}
