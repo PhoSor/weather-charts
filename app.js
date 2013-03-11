@@ -11,6 +11,7 @@ var url = 'http://xml.weather.co.ua/1.2/forecast/1515?dayf=5',
 /* var minTemp = [],
     maxTemp = [], */
 var temperature = [],
+    pressure = [],
     time = [];
 
 function int(number) {
@@ -43,6 +44,13 @@ function getTemp(forecastDay) {
   return [min, max];
 }
 
+function getPressure(forecastDay) {
+  var pressure = forecastDay.getChild('p'),
+      max = int(pressure.getChildText('max'));
+
+  return max;
+}
+
 function getTime(forecastDay) {
   var date = forecastDay.attr('date'),
       hour = forecastDay.attr('hour'),
@@ -58,6 +66,7 @@ function makeForecastJSON() {
   minTemp = forecastDays.map(getMinTemp);
   maxTemp = forecastDays.map(getMaxTemp);
   // temperature = forecastDays.map(getTemp);
+  pressure = forecastDays.map(getPressure);
   time = forecastDays.map(getTime);
 
   console.log('JSON done.');
@@ -75,6 +84,7 @@ app.use(express.static(__dirname + '/public'));
 app.get('/temp', function(require, response) {
   var data = {
     time: time,
+    pressure: pressure,
     // temperature: temperature
     temperature: {
       min: minTemp,
