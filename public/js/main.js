@@ -7,8 +7,8 @@ $(function() {
         chart: {
           renderTo: 'container',
           type: 'area',
-          marginRight: 130,
-          marginBottom: 25
+          marginRight: 150,
+          marginBottom: 30
         },
         title: {
           text: 'Daily Temperature',
@@ -19,7 +19,22 @@ $(function() {
           x: -20
         },
         xAxis: {
-          type: 'datetime'
+          type: 'datetime',
+          tickInterval: 3 * 3600 * 1000,
+          tickPositions: data.time,
+          labels: {
+            formatter: function() {
+              var label = '',
+                  date = new Date(this.value);
+              console.log(date.getHours(), date.getUTCHours());
+              if (date.getUTCHours() == 3) {
+                label = Highcharts.dateFormat('%H:%M<br /><b>%B %e</b>', date);
+              } else {
+                label = Highcharts.dateFormat('%H:%M', date);
+              }
+              return label;
+            }
+          }
         },
         yAxis: {
           title: {
@@ -34,7 +49,8 @@ $(function() {
         tooltip: {
           formatter: function() {
             return '<b>' + this.series.name + '</b><br/>' +
-                this.x + ': ' + this.y + '°C';
+                Highcharts.dateFormat('%B %e, %H:%M', this.x) +
+                ': ' + this.y + '°C';
           }
         },
         legend: {
@@ -47,10 +63,10 @@ $(function() {
         },
         series: [
           {
-            name: 'Temp',
-            data: data.temperature.max,
-            pointInterval: 6 * 3600 * 1000,
-            pointStart: data.time[0]
+            name: 'Min temperature',
+            data: data.temperature.min,
+            pointStart: data.time[1],
+            pointInterval: 6 * 3600 * 1000
           }
           /* {
             name: 'Min',
