@@ -7,16 +7,11 @@ var routes = require('../config/routes');
 app.models = require('../config/models');
 
 function regRoute(route) {
-  console.log(route);
   app[route.verb](route.path, route.action);
 }
 
 function start() {
   app.use(express.static(__dirname + '/../public'));
-
-  /* app.get('/', function(require, response) {
-    response.sendfile('../public/index.html');
-  }); */
 
   routes.forEach(regRoute);
 
