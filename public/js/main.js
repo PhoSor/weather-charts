@@ -1,13 +1,13 @@
 $(function() {
   var chart;
   $(document).ready(function() {
-    $.getJSON('/temp', function(data) {
+    /* $.getJSON('/temp', function(data) {
       console.log(data);
       chart = new Highcharts.Chart({
         chart: {
           renderTo: 'container',
           type: 'area',
-          marginRight: 190,
+          marginRight: 170,
           marginBottom: 30
         },
         title: {
@@ -74,7 +74,7 @@ $(function() {
         },
         series: [
           {
-            name: 'Min temperature',
+            name: 'Temperature',
             data: data.temperature.min,
             pointStart: data.time[1],
             pointInterval: 6 * 3600 * 1000
@@ -87,17 +87,17 @@ $(function() {
             type: 'line',
             yAxis: 1
           }
-          /* {
+          [>{
             name: 'Min',
             data: data.temperature.min
           },
           {
             name: 'Max',
             data: data.temperature.max
-          } */
+          }<]
         ]
       });
-    });
+    }); */
   });
 
 });

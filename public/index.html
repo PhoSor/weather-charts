@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Highcharts Example</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/highcharts-more.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+  </head>
+  <body>
+    <!-- page content -->
+    <div class="container-fluid">
+      <div class="page-header">
+        <h1>Weather Charts <small></small></h1>
+      </div>
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="input-append">
+            <input class="span12" id="appendedInputButton" type="text" placeholder="City Name" />
+            <button class="btn" type="button">Search</button>
+          </div>
+          <hr class="span12"/>
+          <div></div>
+        </div> <!-- /span3 -->
+        <div class="span9">
+          <div id="container"></div>
+        </div> <!-- /span9 -->
+      </div> <!-- /row-fluid -->
+    </div>
+  </body>
+</html>
