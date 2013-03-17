@@ -1,0 +1,22 @@
+.city-list li {
+  margin-bottom: 6px;
+  padding: 10px 6px;
+}
+
+.city-list li:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+.img-loader {
+  background: url(/images/loader.gif);
+  position: relative;
+  height: 16px;
+  width: 16px;
+  display: block;
+  float: right;
+  z-index: 3;
+  right: 64px;
+  top: 7px;
+  display: none;
+}
