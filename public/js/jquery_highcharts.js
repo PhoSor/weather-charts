@@ -1,9 +1,6 @@
 $(function() {
   var chart;
   $(document).ready(function() {
-    $.getJSON('/search', {q: 'moscow'}, function(cities) {
-      console.log(cities);
-    });
     /* $.getJSON('/temp', function(data) {
       console.log(data);
       chart = new Highcharts.Chart({

@@ -46,10 +46,32 @@ function getTime(forecastDay) {
   return +time;
 }
 
+function getGeoPosition(city) {
+  var geoPosition = {
+    id: city.attr('id'),
+    name: city.getChildText('name'),
+    region: city.getChildText('region'),
+    country: city.getChildText('country')
+  };
+
+  return geoPosition;
+}
+
+function getSearchURL(query) {
+  return 'http://xml.weather.co.ua/1.2/city/?lang=en&search=' + query;
+}
+
+function getForecastURL(id) {
+  return 'http://xml.weather.co.ua/1.2/forecast/' + id + '?dayf=5';
+}
+
 module.exports = {
+  getGeoPosition: getGeoPosition,
   getMinTemp: getMinTemp,
   getMaxTemp: getMaxTemp,
-  getTemp: getTemp,
   getPressure: getPressure,
-  getTime: getTime
+  getTemp: getTemp,
+  getTime: getTime,
+  getSearchURL: getSearchURL,
+  getForecastURL: getForecastURL
 };

@@ -1,37 +1,31 @@
-// var url = 'http://xml.weather.co.ua/1.2/forecast/1515?dayf=5';
+function makeForecast(u, weather, days) {
+  var tempMap = {
+    min: 'getMinTemp',
+    max: 'getMaxTemp'
+  }, forecastMap = {
+    time: 'getTime',
+    pressure: 'getPressure',
+    temperature: u.mapMethods(tempMap, weather, days)
+  }, forecast = u.mapMethods(forecastMap, weather, days);
 
-function makeForecastJSON(content) {
-  var forecastDays = content.getChild('forecast').getChildren('day');
-
-  minTemp = forecastDays.map(weather.getMinTemp);
-  maxTemp = forecastDays.map(weather.getMaxTemp);
-  // temperature = forecastDays.map(getTemp);
-  pressure = forecastDays.map(weather.getPressure);
-  time = forecastDays.map(weather.getTime);
-
-  console.log('JSON done.');
+  return forecast;
 }
 
-function nan() {
-  console.log('nan');
-  arguments[1].send('ok!');
+function get(request, response) {
+  var models = request.app.models,
+      http = models.http, weather = models.weather, u = models.util,
+      cityId = request.query.id, url = weather.getForecastURL(cityId);
+
+  function requestDone(content) {
+    var days = content.getChild('forecast').getChildren('day'),
+        forecast = makeForecast(u, weather, days);
+
+    response.send(forecast);
+  }
+
+  http.get(url, requestDone);
 }
 
-/* app.get('/temp', function(request, response, next) {
-  // console.log('request', request.app.models);
-  // console.log('response', response);
-  var data = {
-    time: time,
-    pressure: pressure,
-    // temperature: temperature
-    temperature: {
-      min: minTemp,
-      max: maxTemp
-    }
-  };
-
-  response.send(data);
-}); */
 module.exports = {
-  temp: nan
+  get: get
 };

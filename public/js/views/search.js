@@ -7,6 +7,8 @@ define(['backbone', 'models/search', 'collections/cities', 'views/city'],
           this.model = new Search;
           this.collection = new Cities;
 
+          this.resultList = [];
+
           this.input = this.$el.children('[type=text]');
 
           this.input.keyup(function() {
@@ -47,11 +49,14 @@ define(['backbone', 'models/search', 'collections/cities', 'views/city'],
           var resultEl = this.options.resultEl,
               search = this;
 
-          resultEl.html('');
+          for (var i = 0; i < search.resultList.length; i++) {
+            search.resultList[i].remove();
+          }
 
           this.collection.each(function(city) {
             var view = new CityView({model: city});
             search.listenTo(view, 'selected', search.selectCity);
+            search.resultList.push(view);
             resultEl.append(view.render().el);
           });
         },

@@ -1,6 +1,7 @@
 var modelsPath = '../app/models/';
 
 module.exports = {
-  forecast: 'forecast',
-  http: require(modelsPath + 'http')
+  weather: require(modelsPath + 'weather'),
+  http: require(modelsPath + 'http'),
+  util: require(modelsPath + 'util')
 };
