@@ -24,4 +24,7 @@ define(['jquery', 'views/search'],
       console.log('hi, i\'m module!');
       var search = new SearchView({el: $('.search'),
         resultEl: $('.city-list')});
+      search.on('selected', function(view) {
+        console.log(view.model.toJSON());
+      });
     });

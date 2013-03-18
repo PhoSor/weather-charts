@@ -13,7 +13,7 @@ define(['backbone'],
           // console.log('request', this.get('query'));
           var model = this;
           $.getJSON(this.get('url'), {q: this.get('query')}, function(data) {
-            // console.log('done', model.get('query'));
+                // console.log('done', model.get('query'));
             model.trigger('result', data);
           });
         }

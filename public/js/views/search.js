@@ -44,14 +44,20 @@ define(['backbone', 'models/search', 'collections/cities', 'views/city'],
         },
 
         render: function() {
-          var resultEl = this.options.resultEl;
+          var resultEl = this.options.resultEl,
+              search = this;
 
-          resultEl.html();
+          resultEl.html('');
 
           this.collection.each(function(city) {
             var view = new CityView({model: city});
+            search.listenTo(view, 'selected', search.selectCity);
             resultEl.append(view.render().el);
           });
+        },
+
+        selectCity: function(view) {
+          this.trigger('selected', view);
         }
       });
 
