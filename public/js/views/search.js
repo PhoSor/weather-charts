@@ -1,11 +1,11 @@
-define(['backbone', 'models/search', 'collections/cities', 'views/city'],
-    function(Backbone, Search, Cities, CityView) {
+define(['backbone', 'models/search', 'views/city'],
+    function(Backbone, Search, CityView) {
       var SearchView = Backbone.View.extend({
         initialize: function() {
           var view = this;
 
           this.model = new Search;
-          this.collection = new Cities;
+          this.collection = new Backbone.Collection;
 
           this.resultList = [];
 

@@ -1,13 +1,23 @@
-define(['backbone', 'models/forecast', 'views/chart', 'models/charts/temp'],
-    function(Backbone, Forecast, ChartView, Temp) {
+define(['backbone', 'views/chart', 'models/charts/temp'],
+    function(Backbone, ChartView, Temp) {
+      var Forecasts = Backbone.Collection.extend({
+        model: Backbone.Model,
+        url: '/forecast'
+      });
+
       var ChartsView = Backbone.View.extend({
         initialize: function() {
-          this.charts = [];
-          this.forecast = new Forecast;
-          this.forecast.fetch();
+          this.forecasts = new Forecasts;
+          this.charts = new Backbone.Collection;
+        },
 
-          var temp = new Temp(this.forecast.toJSON());
-          this.charts.push(new ChartView(temp));
+        create: function(id) {
+          var temp, view = this, forecast = new Backbone.Model({id: id});
+          this.forecasts.add(forecast);
+          forecast.fetch({success: function() {
+            temp = Temp(forecast.toJSON());
+            view.charts.add(new ChartView({data: temp}));
+          }});
         }
       });
 

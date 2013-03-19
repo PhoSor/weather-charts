@@ -1,16 +1,20 @@
 requirejs.config({
   paths: {
-    underscore: '/libs/underscore/js/underscore-min',
-    jquery: '/libs/jquery/js/jquery.min',
     backbone: '/libs/backbone/js/backbone-min',
+    bootstrap: '/libs/bootstrap/js/bootstrap.min',
+    jquery: '/libs/jquery/js/jquery.min',
     highcharts: '/libs/highcharts/js/highcharts',
-    highcharts_more: '/libs/highcharts/js/highcharts-more'
+    highcharts_more: '/libs/highcharts/js/highcharts-more',
+    underscore: '/libs/underscore/js/underscore-min'
   },
 
   shim: {
     'backbone': {
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
+    },
+    'bootstrap': {
+      deps: ['jquery']
     },
     'underscore': {
       exports: '_'
@@ -27,7 +31,7 @@ requirejs.config({
   }
 });
 
-define(['jquery', 'views/search', 'views/charts'],
+define(['jquery', 'views/search', 'views/charts', 'bootstrap'],
     function($, SearchView, ChartsView) {
       console.log('hi, i\'m module!');
       var search = new SearchView({el: $('.search'),
@@ -35,5 +39,6 @@ define(['jquery', 'views/search', 'views/charts'],
       search.on('selected', function(view) {
         console.log(view.model.toJSON());
       });
-      // var charts = new ChartsView();
+      var charts = new ChartsView;
+      charts.create(1515);
     });

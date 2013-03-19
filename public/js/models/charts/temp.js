@@ -8,12 +8,8 @@ define(['highcharts'], function(Highcharts) {
         marginBottom: 30
       },
       title: {
-        text: 'Daily Weather for ' + data.name,
-        x: -20 //center
-      },
-      subtitle: {
         text: 'Forecast for 5 days',
-        x: -20
+        x: -20 //center
       },
       xAxis: {
         type: 'datetime',
@@ -87,5 +83,7 @@ define(['highcharts'], function(Highcharts) {
       ]
     };
   };
+
+  return Temp;
 });
 

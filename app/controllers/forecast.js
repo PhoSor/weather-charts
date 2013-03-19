@@ -14,7 +14,7 @@ function makeForecast(u, weather, days) {
 function get(request, response) {
   var models = request.app.models,
       http = models.http, weather = models.weather, u = models.util,
-      cityId = request.query.id, url = weather.getForecastURL(cityId);
+      cityId = request.params.id, url = weather.getForecastURL(cityId);
 
   function requestDone(content) {
     var days = content.getChild('forecast').getChildren('day'),
