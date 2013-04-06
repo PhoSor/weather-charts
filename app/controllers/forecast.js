@@ -5,6 +5,8 @@ function makeForecast(u, weather, days) {
   }, forecastMap = {
     time: 'getTime',
     pressure: 'getPressure',
+    cloud: 'getCloud',
+    humidity: 'getHumidity',
     temperature: u.mapMethods(tempMap, weather, days)
   }, forecast = u.mapMethods(forecastMap, weather, days);
 
@@ -18,7 +20,9 @@ function get(request, response) {
 
   function requestDone(content) {
     var days = content.getChild('forecast').getChildren('day'),
+        city = content.getChild('city'),
         forecast = makeForecast(u, weather, days);
+    forecast.city = weather.getGeoPositionFromForecast(city);
 
     response.send(forecast);
   }

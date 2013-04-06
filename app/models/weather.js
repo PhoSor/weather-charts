@@ -38,6 +38,19 @@ function getPressure(forecastDay) {
   return max;
 }
 
+function getHumidity(forecastDay) {
+  var humidity = forecastDay.getChild('hmid'),
+      max = int(humidity.getChildText('max'));
+
+  return max;
+}
+
+function getCloud(forecastDay) {
+  var cloud = int(forecastDay.getChildText('cloud'));
+
+  return cloud;
+}
+
 function getTime(forecastDay) {
   var date = forecastDay.attr('date'),
       hour = forecastDay.attr('hour'),
@@ -57,19 +70,33 @@ function getGeoPosition(city) {
   return geoPosition;
 }
 
+function getGeoPositionFromForecast(city) {
+  var geoPosition = {
+    id: city.attr('id'),
+    name: city.getChildText('name'),
+    region: city.getChildText('region'),
+    country: city.getChild('country').getChildText('name')
+  };
+
+  return geoPosition;
+}
+
 function getSearchURL(query) {
   return 'http://xml.weather.co.ua/1.2/city/?lang=en&search=' + query;
 }
 
 function getForecastURL(id) {
-  return 'http://xml.weather.co.ua/1.2/forecast/' + id + '?dayf=5';
+  return 'http://xml.weather.co.ua/1.2/forecast/' + id + '?lang=en&dayf=5';
 }
 
 module.exports = {
   getGeoPosition: getGeoPosition,
+  getGeoPositionFromForecast: getGeoPositionFromForecast,
   getMinTemp: getMinTemp,
   getMaxTemp: getMaxTemp,
   getPressure: getPressure,
+  getHumidity: getHumidity,
+  getCloud: getCloud,
   getTemp: getTemp,
   getTime: getTime,
   getSearchURL: getSearchURL,

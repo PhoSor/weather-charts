@@ -1,19 +1,16 @@
 define(['highcharts'], function(Highcharts) {
-  var Temp = function(data) {
+  var Pressure = function(data) {
     return {
       chart: {
-        renderTo: 'temp',
-        type: 'area',
-        marginRight: 128,
+        renderTo: 'pressure',
+        type: 'line',
+        marginRight: 110,
         marginBottom: 30
+        // width: 400
       },
       title: {
-        text: data.city.name,
-        x: -42 //center
-      },
-      subtitle: {
         text: 'Forecast for 5 days',
-        x: -42 //center
+        x: -20 //center
       },
       xAxis: {
         type: 'datetime',
@@ -34,7 +31,7 @@ define(['highcharts'], function(Highcharts) {
       },
       yAxis: [{
         title: {
-          text: 'Temperature (°C)'
+          text: 'Pressure(mm Hg)'
         },
         tickInterval: 4,
         plotLines: [{
@@ -47,7 +44,7 @@ define(['highcharts'], function(Highcharts) {
         formatter: function() {
           return '<b>' + this.series.name + '</b><br/>' +
               Highcharts.dateFormat('%B %e, %H:%M', this.x) +
-              ': <b>' + this.y + '°C</b>';
+              ': <b>' + this.y + ' mm Hg</b>';
         }
       },
       legend: {
@@ -60,14 +57,16 @@ define(['highcharts'], function(Highcharts) {
       },
       series: [
         {
-          name: 'Temperature',
-          data: data.temperature.min,
+          name: 'Pressure',
+          data: data.pressure,
           pointStart: data.time[1],
           pointInterval: 6 * 3600 * 1000
-        }]
+        }
+      ]
     };
   };
 
-  return Temp;
+  return Pressure;
 });
+
 

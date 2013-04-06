@@ -1,6 +1,10 @@
 define(['backbone', 'models/search', 'views/city'],
     function(Backbone, Search, CityView) {
       var SearchView = Backbone.View.extend({
+        events: {
+          'click button': 'btnClick'
+        },
+
         initialize: function() {
           var view = this;
 
@@ -19,10 +23,25 @@ define(['backbone', 'models/search', 'views/city'],
           this.listenTo(this.model, 'result', this.result);
 
           this.listenTo(this.collection, 'reset', this.render);
+
+          this.input.val('Moscow').trigger('keyup');
         },
 
         toggleLoader: function() {
-          Backbone.$('.img-loader').toggle();
+          Backbone.$('.img-loader:first').toggle();
+        },
+
+        listEmpty: function(isEmpty) {
+          if (isEmpty) {
+            Backbone.$('.city-list').addClass('empty');
+          } else {
+            Backbone.$('.city-list').removeClass('empty');
+          }
+        },
+
+        btnClick: function() {
+          this.model.trigger('change:query',
+              this.model, this.model.get('query'));
         },
 
         run: function(search, query) {
@@ -52,6 +71,14 @@ define(['backbone', 'models/search', 'views/city'],
           for (var i = 0; i < search.resultList.length; i++) {
             search.resultList[i].remove();
           }
+          search.resultList = [];
+          search.listEmpty(true);
+
+          if (search.collection.at(0).get('name') == null) {
+            return;
+          }
+
+          search.listEmpty(false);
 
           this.collection.each(function(city) {
             var view = new CityView({model: city});

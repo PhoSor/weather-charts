@@ -34,11 +34,12 @@ requirejs.config({
 define(['jquery', 'views/search', 'views/charts', 'bootstrap'],
     function($, SearchView, ChartsView) {
       console.log('hi, i\'m module!');
+      var charts = new ChartsView({el: $('.tabbable')});
       var search = new SearchView({el: $('.search'),
         resultEl: $('.city-list')});
       search.on('selected', function(view) {
-        console.log(view.model.toJSON());
+        // console.log(view.model.toJSON());
+        charts.create(view.model.get('id'));
       });
-      var charts = new ChartsView;
       charts.create(1515);
     });

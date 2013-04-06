@@ -1,19 +1,15 @@
 define(['highcharts'], function(Highcharts) {
-  var Temp = function(data) {
+  var Cloud = function(data) {
     return {
       chart: {
-        renderTo: 'temp',
+        renderTo: 'cloud',
         type: 'area',
-        marginRight: 128,
+        marginRight: 88,
         marginBottom: 30
       },
       title: {
-        text: data.city.name,
-        x: -42 //center
-      },
-      subtitle: {
         text: 'Forecast for 5 days',
-        x: -42 //center
+        x: -20 //center
       },
       xAxis: {
         type: 'datetime',
@@ -34,9 +30,9 @@ define(['highcharts'], function(Highcharts) {
       },
       yAxis: [{
         title: {
-          text: 'Temperature (°C)'
+          text: 'Cloud (%)'
         },
-        tickInterval: 4,
+        // tickInterval: 4,
         plotLines: [{
           value: 0,
           width: 1,
@@ -47,7 +43,7 @@ define(['highcharts'], function(Highcharts) {
         formatter: function() {
           return '<b>' + this.series.name + '</b><br/>' +
               Highcharts.dateFormat('%B %e, %H:%M', this.x) +
-              ': <b>' + this.y + '°C</b>';
+              ': <b>' + this.y + '%</b>';
         }
       },
       legend: {
@@ -60,14 +56,15 @@ define(['highcharts'], function(Highcharts) {
       },
       series: [
         {
-          name: 'Temperature',
-          data: data.temperature.min,
+          name: 'Cloud',
+          data: data.cloud,
           pointStart: data.time[1],
           pointInterval: 6 * 3600 * 1000
         }]
     };
   };
 
-  return Temp;
+  return Cloud;
 });
+
 

@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>Highcharts Example</title>
-    <link href="/css/style.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/css/style.css" rel="stylesheet">
     <script data-main="js/main.js" src="/libs/require/js/require.js"></script>
   </head>
   <body>
@@ -23,47 +23,36 @@
           <i class="img-loader"></i>
           <!-- <hr class="span12"/> -->
           <div class="clearfix"></div>
-          <ul class="city-list unstyled span12"></ul>
+          <ul class="city-list empty unstyled span3"></ul>
           <div></div>
         </div> <!-- /span3 -->
         <div class="span9">
           <!-- <h4>Daily Weather for City</h4> -->
           <div class="tabbable"> <!-- Only required for left/right tabs -->
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab1" data-toggle="tab">Temperature</a></li>
-              <li><a href="#tab2" data-toggle="tab">Pressure</a></li>
-              <li><a href="#tab3" data-toggle="tab">Cloudness</a></li>
-              <li><a href="#tab4" data-toggle="tab">Humidity</a></li>
-              <li><a href="#tab5" data-toggle="tab">Wind</a></li>
-              <li><a href="#tab6" data-toggle="tab">Rumb</a></li>
-              <li><a href="#tab7" data-toggle="tab">PPCP</a></li>
-              <li><a href="#tab8" data-toggle="tab">WPI</a></li>
+              <li class="disabled"><a href="#temp" data-toggle="tab">Temperature</a></li>
+              <li class="disabled"><a href="#pressure" data-toggle="tab">Pressure</a></li>
+              <li class="disabled"><a href="#cloud" data-toggle="tab">Cloud</a></li>
+              <li class="disabled"><a href="#humidity" data-toggle="tab">Humidity</a></li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane active" id="tab1">
-                <div id="container"></div>
+              <div class="tab-pane" id="temp">
+                <div id="temp"></div>
               </div>
-              <div class="tab-pane" id="tab2">
-                <p>Howdy, I'm in Section 2.</p>
+              <div class="tab-pane" id="pressure">
+                <div id="pressure"></div>
               </div>
-              <div class="tab-pane" id="tab3">
-                <p>Howdy, I'm in Section 3.</p>
+              <div class="tab-pane" id="cloud">
+                <div id="cloud"></div>
               </div>
-              <div class="tab-pane" id="tab4">
-                <p>Howdy, I'm in Section 4.</p>
+              <div class="tab-pane" id="humidity">
+                <div id="humidity"></div>
               </div>
-              <div class="tab-pane" id="tab5">
-                <p>Howdy, I'm in Section 5.</p>
-              </div>
-              <div class="tab-pane" id="tab6">
-                <p>Howdy, I'm in Section 6.</p>
-              </div>
-              <div class="tab-pane" id="tab7">
-                <p>Howdy, I'm in Section 7.</p>
-              </div>
-              <div class="tab-pane" id="tab8">
-                <p>Howdy, I'm in Section 8.</p>
-              </div>
+            </div>
+          </div> <!-- /tabbable -->
+          <div class="overlay hide">
+            <div class="load-wrapper">
+              <i class="img-loader"></i>
             </div>
           </div>
         </div> <!-- /span9 -->
